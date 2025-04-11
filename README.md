@@ -106,14 +106,6 @@ docker run -d \
 
 *   Create an Astra DB instance if you haven't already.
 *   Obtain your **Database ID**, **Region**, **Application Token**, and **Keyspace Name**.
-*   **(Optional but Recommended if Script Fails):** Manually create the `hotel` collection:
-    *   Go to your Keyspace in the Astra DB UI.
-    *   Create a new collection named `hotel`.
-    *   Enable "Vector Search".
-    *   Set Dimension to `384`.
-    *   Set Metric to `cosine`.
-    *   Under "Vectorize Settings", enable "Use a Vectorize service", choose Provider `Hugging Face`, and select the Model `sentence-transformers/all-MiniLM-L6-v2`.
-    *   Create the other collections (`airline`, `airport`, `route`, `landmark`, `user`, `booking`) as standard collections (no vector settings needed) if the script fails to create them.
 
 ### 3. Run the Data Migration Script
 

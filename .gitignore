@@ -1,0 +1,42 @@
+# Environment variables
+.env
+
+# Python
+venv_migration/
+*.pyc
+__pycache__/
+*.log
+
+# Java / Maven
+try-cb-java/
+try-cb-frontend-v2/
+migrate_couchbase_to_astra.py
+**/target
+try-cb-java-astra/pom.xml.tag
+try-cb-java-astra/pom.xml.releaseBackup
+try-cb-java-astra/pom.xml.versionsBackup
+try-cb-java-astra/release.properties
+try-cb-java-astra/dependency-reduced-pom.xml
+try-cb-java-astra/buildNumber.properties
+.mvn/
+mvnw
+mvnw.cmd
+*.jar
+*.war
+*.ear
+
+# IDE directories
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db 

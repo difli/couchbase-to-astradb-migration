@@ -51,7 +51,6 @@ This Python script handles the data transfer process.
 5.  **Document Preparation (`get_document_content`):**
     *   Fetches each document from Couchbase by ID.
     *   Prepares a corresponding document for Astra DB.
-    *   Skips certain fields like Couchbase `cas` and the large `content` field from hotels (which caused insertion errors due to size limits).
     *   **Vectorize Trigger:** For `hotel` documents, it concatenates the text content from relevant fields (`name`, `description`, `address`, `city`, `state`, `country`) into a single string. It then adds a special field `"$vectorize"` to the document, setting its value to this combined text string.
 6.  **Data Insertion (`insert_batch_astra`):**
     *   Inserts documents into the corresponding Astra collection in batches using `astra_collection.insert_many(documents)`.
@@ -141,15 +140,6 @@ docker run -d \
 *   The frontend is typically configured to connect to a backend running on `http://localhost:8080`. If your backend runs on a different port, you might need to adjust the frontend configuration (often via environment variables or a config file - check the frontend repo's README).
 
 Now, you should be able to interact with the application in your browser. Hotel searches will use the Astra DB vector search powered by the migrated backend.
-
-## Challenges & Workarounds Encountered
-
-*   **SDK Preview Version (`astra-db-java:2.0.0-PREVIEW3`):** The preview SDK had significant differences from documented examples or later versions (e.g., class locations like `FindOptions`, lack of builders, method signatures). This required inspection and trial-and-error (e.g., finding `CollectionFindOptions`, `Sort.vectorize`, `Projection.exclude`).
-*   **Vector Collection Creation (`astrapy`):** Programmatic creation of vector-enabled collections with Vectorize service configuration using `astrapy`'s `DataAPIClient`. 
-*   **Frontend Compatibility:** Maintaining the exact API contract was crucial and required careful adjustments to:
-    *   Endpoint paths.
-    *   Request payload structures (especially for bookings).
-    *   Response payload structure (`{"data": ..., "context": []}` wrapper).
 
 ## Running the Migrated Application (`try-cb-java-astra`)
 

@@ -147,4 +147,4 @@ Now, you should be able to interact with the application in your browser. Hotel 
 
 ## Conclusion
 
-This project demonstrates a successful migration from a Couchbase backend to Astra DB, incorporating vector search capabilities while maintaining compatibility with an existing frontend. It highlights the importance of understanding SDK specifics (especially previews), adapting to API differences, and carefully managing data migration when incorporating features like vector embeddings. 
+This project demonstrates a successful migration from a Couchbase backend to Astra DB, incorporating vector search capabilities while maintaining compatibility with an existing frontend. 

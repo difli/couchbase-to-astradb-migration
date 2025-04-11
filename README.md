@@ -46,7 +46,6 @@ This Python script handles the data transfer process.
         *   `provider`: "huggingface"
         *   `model_name`: "sentence-transformers/all-MiniLM-L6-v2" (resulting in 384-dimension vectors).
         *   `metric`: Cosine similarity.
-        *   **Note:** Programmatic creation using the `DataAPIClient` (which the script uses) and this builder syntax was found to be potentially unreliable or incompatible depending on the `astrapy` version. **Manual creation of the `hotel` collection via the Astra UI/CLI (with the same Vectorize settings) *before* running the script might be necessary if programmatic creation fails.**
     *   **Standard Collections:** For other types, it uses a simple `create_collection` call.
 4.  **Data Fetching:** Queries Couchbase to get document IDs for each specified `doc_type`.
 5.  **Document Preparation (`get_document_content`):**
@@ -64,8 +63,7 @@ This Python script handles the data transfer process.
 2.  Create a virtual environment (optional but recommended): `python -m venv venv_migration` and activate it.
 3.  Install dependencies: `pip install -r requirements.txt`.
 4.  Create a `.env` file in the project root and populate it with your Astra DB credentials (API Endpoint, Application Token, Keyspace). See the `.env` file in this repository for the required variable names. Also configure Couchbase connection details within the script if needed.
-5.  **(Potentially Required):** Manually create the `hotel` collection in Astra DB via the UI or CLI. Enable Vector Search, set the dimension to 384, metric to cosine, and configure the Vectorize service (Provider: huggingface, Model: `sentence-transformers/all-MiniLM-L6-v2`).
-6.  Run the script: `python migrate_couchbase_to_astra_with_vector.py`.
+5.  Run the script: `python migrate_couchbase_to_astra_with_vector.py`.
 
 ## Running the Full Application Stack
 
@@ -147,9 +145,6 @@ Now, you should be able to interact with the application in your browser. Hotel 
 ## Challenges & Workarounds Encountered
 
 *   **SDK Preview Version (`astra-db-java:2.0.0-PREVIEW3`):** The preview SDK had significant differences from documented examples or later versions (e.g., class locations like `FindOptions`, lack of builders, method signatures). This required inspection and trial-and-error (e.g., finding `CollectionFindOptions`, `Sort.vectorize`, `Projection.exclude`).
-*   **Data API Limitations:**
-    *   Lack of support for complex `$regex` options prevented direct translation of original text searches.
-    *   Apparent bug or limitation with the `$in` operator (`Filters.in`) required fetching user bookings one by one.
 *   **Vector Collection Creation (`astrapy`):** Programmatic creation of vector-enabled collections with Vectorize service configuration using `astrapy`'s `DataAPIClient`. 
 *   **Frontend Compatibility:** Maintaining the exact API contract was crucial and required careful adjustments to:
     *   Endpoint paths.

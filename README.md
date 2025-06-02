@@ -127,7 +127,7 @@ docker run -d \
 *   Clone the `try-cb-frontend-v2` repository: `git clone https://github.com/couchbase/try-cb-frontend-v2.git` (verify URL)
 *   Navigate into the `try-cb-frontend-v2` directory.
 *   Install dependencies: `npm install`
-*   Start the frontend development server: `npm start`
+*   Start the frontend development server: `npm run serve`
     *   This usually opens the application automatically in your browser, typically at `http://localhost:3000`.
 *   The frontend is typically configured to connect to a backend running on `http://localhost:8080`. If your backend runs on a different port, you might need to adjust the frontend configuration (often via environment variables or a config file - check the frontend repo's README).
 
